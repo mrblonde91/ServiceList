@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.list);
 
         new AsyncTaskRunner().execute(URL);
         
@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
 							 jService.getString("locationType")
 							);
 					services.add(service);
-					
+				
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
