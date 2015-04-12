@@ -8,15 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class Services extends ArrayAdapter<Item> {
+public class ServiceAdapter extends BaseAdapter {
 
-public Services(Context context, int textViewResourceId) {
+public ServiceAdapter(Context context, int textViewResourceId) {
     super(context, textViewResourceId);
 }
 
-public Services(Context context, int resource, List<Item> items) {
+public ServiceAdapter(Context context, int resource, List<Item> items) {
     super(context, resource, items);
 }
 
