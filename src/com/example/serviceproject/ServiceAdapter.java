@@ -22,10 +22,9 @@ public class ServiceAdapter extends BaseAdapter implements OnClickListener {
     Service temp = null;
     int i = 0;
 
-    public ServiceAdapter(Activity activity, ArrayList<Service> services, Resources res) {
+    public ServiceAdapter(Activity activity, ArrayList<Service> services) {
         this.activity = activity;
         this.services = services;
-        this.res = res;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     
@@ -86,15 +85,15 @@ public class ServiceAdapter extends BaseAdapter implements OnClickListener {
             holder.text.setText("No data");
         } else {
 
-             /***** Get each Model object from Arraylist ********/
+             
             temp = null;
             temp = ( Service ) services.get( position );
 
             /************  Set Model values in Holder elements ***********/
 
              holder.text.setText( temp.getName() );
-             holder.text1.setText( temp.getAddress());
-             v.setOnClickListener((android.view.View.OnClickListener) new OnItemClickListener( position ));
+             holder.text1.setText( temp.getDesciption());
+ 
         }
 
         return v;

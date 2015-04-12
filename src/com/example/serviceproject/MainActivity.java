@@ -5,7 +5,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
+import android.widget.TableLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,18 +29,29 @@ public class MainActivity extends Activity {
     private final String URL = "http://10.0.2.1/wifeeye/discovery.php?q=wife";
     private ArrayList<Service> services;
     
-    private ListView list;
-    ServiceAdapter service;
+    private ListView listv;
+    private MainActivity mainRef;
+    ServiceAdapter serviceAdapter;
     
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
-
+        
+        services = new ArrayList<Service>();
+        mainRef = this;
         new AsyncTaskRunner().execute(URL);
         
+        listv = (ListView) findViewById(R.id.list);
         
+        
+  	  serviceAdapter = new ServiceAdapter(mainRef, services);
+        
+        listv.setAdapter(serviceAdapter);
+        
+      
+       
 
     }
 
@@ -110,6 +124,8 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
         	  }
+        	 
+              
         	  
           }
 
