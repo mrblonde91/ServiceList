@@ -32,6 +32,10 @@ public ServiceAdapter(Activity activity, ArrayList services, Resources res) {
    res=this.res;
    inflater=(LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 }
+public class ViewHolder {
+	  public TextView text;
+    public TextView text1;
+}
 
 
 @Override
@@ -98,7 +102,6 @@ public void onClick(DialogInterface dialog, int which) {
 	Log.e("Button Clicked", "Click");
 	
 }
-}
 
 private class OnItemClickListener implements OnClickListener
 {
@@ -119,3 +122,6 @@ private class OnItemClickListener implements OnClickListener
     }
                
 }   
+
+}
+

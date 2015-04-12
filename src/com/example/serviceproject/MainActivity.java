@@ -1,6 +1,7 @@
 package com.example.serviceproject;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,5 +33,15 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+    	  private String resp;
+
+    	  @Override
+    	  protected String doInBackground(String... params) {
+    	 
+    	   return resp;
+    	  }
     }
 }
