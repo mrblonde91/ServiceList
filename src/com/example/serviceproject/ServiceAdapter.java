@@ -69,7 +69,7 @@ public class ServiceAdapter extends BaseAdapter implements OnClickListener {
 
              holder.text.setText( temp.getName() );
              holder.text1.setText( temp.getAddress());
-             v.setOnClickListener(new OnItemClickListener( position ));
+             v.setOnClickListener((android.view.View.OnClickListener) new OnItemClickListener( position ));
         }
 
         return v;
@@ -106,7 +106,6 @@ public class ServiceAdapter extends BaseAdapter implements OnClickListener {
              mPosition = position;
         }
 
-        @Override
         public void onClick(View arg0) {
 
 
@@ -117,7 +116,20 @@ public class ServiceAdapter extends BaseAdapter implements OnClickListener {
             sct.onItemClick(mPosition);
         }
 
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			// TODO Auto-generated method stub
+			
+		}
+
     }
+
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 
