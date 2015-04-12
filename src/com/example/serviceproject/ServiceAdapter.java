@@ -72,6 +72,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 
          holder.text.setText( temp.getName() );
          holder.text1.setText( temp.getAddress());
+         v.setOnClickListener(new OnItemClickListener( position ));
     }
 
     return v;
@@ -98,7 +99,7 @@ public long getItemId(int position) {
 }
 
 @Override
-public void onClick(DialogInterface dialog, int which) {
+public void onClick(View v) {
 	Log.e("Button Clicked", "Click");
 	
 }
