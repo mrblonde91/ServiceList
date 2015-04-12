@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,11 +18,16 @@ import java.lang.String;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
 
     private final String URL = "http://10.0.2.1/wifeeye/discovery.php?q=wife";
+    private ArrayList<Service> services;
+    
+    private ListView list;
+    ServiceAdapter service;
     
 
     @Override
@@ -30,6 +36,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         new AsyncTaskRunner().execute(URL);
+        
+        
 
     }
 
@@ -62,7 +70,7 @@ public class MainActivity extends Activity {
 
     private class AsyncTaskRunner extends AsyncTask<String, Void, JSONArray> {
 
-    	  private String resp;
+    	 // private String resp;
 
     	  @Override
     	  protected JSONArray doInBackground(String... params) {
@@ -80,7 +88,29 @@ public class MainActivity extends Activity {
 
           @Override
           protected void onPostExecute(JSONArray jsonData) {
-                
+              
+        	  int lenght = jsonData.length();
+        	  
+        	  
+        	  for ( int i = 0; i < lenght; i++ ){
+        		  
+        		  try {
+        			  
+					JSONObject jService = jsonData.getJSONObject(i);
+					Service service = new Service(
+							 jService.getString("serviceName"),
+							 jService.getString("description"),
+							 jService.getString("location"),
+							 jService.getString("locationType")
+							);
+					services.add(service);
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	  }
+        	  
           }
 
 

@@ -1,43 +1,68 @@
 package com.example.serviceproject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
-import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class ServiceAdapter extends BaseAdapter implements OnClickListener {
 
     private Activity activity;
-    private ArrayList services;
+    private ArrayList<Service> services;
     private static LayoutInflater inflater = null;
     public Resources res;
     Service temp = null;
     int i = 0;
 
-    public ServiceAdapter(Activity activity, ArrayList services, Resources res) {
+    public ServiceAdapter(Activity activity, ArrayList<Service> services, Resources res) {
         this.activity = activity;
         this.services = services;
         this.res = res;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+    
     public class ViewHolder {
         public TextView text;
         public TextView text1;
     }
 
 
+    
+
+    @Override
+    public int getCount() {
+        return services.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        // TODO Auto-generated method stub
+        return services.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        // TODO Auto-generated method stub
+        return position;
+    }
+
+    /*@Override
+    public void onClick(View v) {
+        Log.e("Button Clicked", "Click");
+
+    }*/
+
+    
+    
+    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -75,30 +100,11 @@ public class ServiceAdapter extends BaseAdapter implements OnClickListener {
         return v;
 
     }
-
-    @Override
-    public int getCount() {
-        return services.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return services.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return position;
-    }
-
-    /*@Override
-    public void onClick(View v) {
-        Log.e("Button Clicked", "Click");
-
-    }*/
-
+    
+    
+    
+    
+    
     private class OnItemClickListener implements OnClickListener
     {
          private int mPosition;

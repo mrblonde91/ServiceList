@@ -9,7 +9,16 @@ public class Service{
     private String address;
     private String type;
 
-    public String getName() {
+    
+
+	public Service(String name, String desciption, String address, String type) {
+		this.name = name;
+		this.desciption = desciption;
+		this.address = address;
+		this.type = type;
+	}
+
+	public String getName() {
         return name;
     }
 
