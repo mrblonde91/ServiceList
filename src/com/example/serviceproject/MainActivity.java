@@ -34,6 +34,14 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void onItemClick(int mPosition) {
+        //add click operation
+
+    }
+
+
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
     	  private String resp;
