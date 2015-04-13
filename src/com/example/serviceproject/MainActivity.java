@@ -1,12 +1,16 @@
 package com.example.serviceproject;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TableLayout;
 
@@ -50,7 +54,21 @@ public class MainActivity extends Activity {
         
         listv.setAdapter(serviceAdapter);
         
-      
+        listv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Service s = services.get(position);
+				
+				Uri uri = Uri.parse(s.getAddress());
+				
+				Intent intent = new Intent(Intent.ACTION_MAIN);
+				//intent.setComponent()
+				
+			}
+		});
        
 
     }
