@@ -1,36 +1,38 @@
 package com.example.serviceproject;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.TableLayout;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.String;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 
 public class MainActivity extends Activity {
 
-    private final String URL = "http://10.0.2.1/wifeeye/discovery.php?q=wife";
+    private final String URL = "http://192.168.173.1/wifeeye/discovery.php?q=wife";
     private ArrayList<Service> services;
     
     private ListView listv;
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
         listv = (ListView) findViewById(R.id.list);
         
         
-  	  serviceAdapter = new ServiceAdapter(mainRef, services);
+  	    serviceAdapter = new ServiceAdapter(mainRef, services);
         
         listv.setAdapter(serviceAdapter);
         
@@ -60,13 +62,28 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				
+				Toast.makeText(mainRef, "Smoking", Toast.LENGTH_LONG).show();
+				
+				
 				Service s = services.get(position);
 				
 				Uri uri = Uri.parse(s.getAddress());
 				
-				Intent intent = new Intent(Intent.ACTION_MAIN);
-				//intent.setComponent()
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				Intent browserChooserIntent = Intent.createChooser(intent , "Choose VLC PLEASE");
+				 
+				PackageManager packageManager = getPackageManager();
+				List<ResolveInfo> activities = packageManager.queryIntentActivities(browserChooserIntent,PackageManager.MATCH_DEFAULT_ONLY);
+				boolean isIntentSafe = activities.size() > 0;
 				
+				if ( isIntentSafe ){
+					Log.e("OK? ",  s.getAddress());
+					startActivity(browserChooserIntent);
+				}
+				else{
+					Log.e("WOW ",  s.getAddress());
+				}
 			}
 		});
        
